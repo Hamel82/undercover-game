@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --black: #0a0a0f;
+  --dark: #12121a;
+  --panel: #1a1a2e;
+  --yellow: #ffe600;
+  --cyan: #00f5ff;
+  --magenta: #ff006e;
+  --red: #ff2020;
+  --green: #39ff14;
+  --white: #f0f0f0;
+  --gray: #444466;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-mono);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.15) 2px,
+    rgba(0,0,0,0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pixel-btn {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  padding: 14px 24px;
+  border: 3px solid;
+  background: transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.1s;
+  position: relative;
+  image-rendering: pixelated;
+}
+
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+}
+
+.pixel-btn.yellow {
+  color: var(--yellow);
+  border-color: var(--yellow);
+  box-shadow: 4px 4px 0 var(--yellow);
+}
+.pixel-btn.yellow:hover {
+  background: var(--yellow);
+  color: var(--black);
+  box-shadow: 6px 6px 0 rgba(255,230,0,0.3);
+}
+
+.pixel-btn.cyan {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  box-shadow: 4px 4px 0 var(--cyan);
+}
+.pixel-btn.cyan:hover {
+  background: var(--cyan);
+  color: var(--black);
+  box-shadow: 6px 6px 0 rgba(0,245,255,0.3);
+}
+
+.pixel-btn.magenta {
+  color: var(--magenta);
+  border-color: var(--magenta);
+  box-shadow: 4px 4px 0 var(--magenta);
+}
+.pixel-btn.magenta:hover {
+  background: var(--magenta);
+  color: var(--white);
+  box-shadow: 6px 6px 0 rgba(255,0,110,0.3);
+}
+
+.pixel-btn.gray {
+  color: var(--gray);
+  border-color: var(--gray);
+  box-shadow: 4px 4px 0 var(--gray);
+}
+.pixel-btn.gray:hover {
+  background: var(--gray);
+  color: var(--white);
+}
+
+.pixel-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.screen {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pixel-title {
+  font-family: var(--font-pixel);
+  line-height: 1.6;
+}
+
+.blink {
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.glitch {
+  position: relative;
+}
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+}
+.glitch::before {
+  color: var(--cyan);
+  animation: glitch1 3s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+.glitch::after {
+  color: var(--magenta);
+  animation: glitch2 3s infinite;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+@keyframes glitch1 {
+  0%, 90%, 100% { transform: translateX(0); }
+  92% { transform: translateX(-3px); }
+  94% { transform: translateX(3px); }
+  96% { transform: translateX(-2px); }
+}
+@keyframes glitch2 {
+  0%, 90%, 100% { transform: translateX(0); }
+  91% { transform: translateX(3px); }
+  93% { transform: translateX(-3px); }
+  95% { transform: translateX(2px); }
+}
+
+.pixel-input {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  background: var(--panel);
+  border: 2px solid var(--gray);
+  color: var(--white);
+  padding: 10px 14px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+.pixel-input:focus {
+  border-color: var(--cyan);
+}
+
+.pixel-select {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  background: var(--panel);
+  border: 2px solid var(--gray);
+  color: var(--white);
+  padding: 10px 14px;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+}
+.pixel-select:focus {
+  border-color: var(--cyan);
+}
+
+.card {
+  background: var(--panel);
+  border: 2px solid var(--gray);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.tag {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  padding: 4px 8px;
+  border: 1px solid;
+  display: inline-block;
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid var(--gray);
+  margin: 20px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blink, .glitch::before, .glitch::after { animation: none; }
+}
